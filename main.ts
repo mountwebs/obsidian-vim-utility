@@ -1,4 +1,23 @@
-import { App, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
+import { App, Modal, Notice, Plugin, PluginSettingTab, Setting, FileSystemAdapter} from 'obsidian';
+
+const { exec } = require('child_process');
+
+const processInVim = (filePath: string) => {
+	exec(`nvim -c 'e ${filePath}' -c 'wq'`, (error: string, stdout: string, stderr: string) => {
+		if (error) {
+				console.log(`error: ${error}`);
+				return;
+		}
+		if (stderr) {
+				console.log(`stderr: ${stderr}`);
+				return;
+		}
+		console.log(`stdout: ${stdout}`);
+		console.log("noe")
+	});
+}
+
+
 
 interface MyPluginSettings {
 	mySetting: string;
@@ -16,6 +35,8 @@ export default class MyPlugin extends Plugin {
 
 		await this.loadSettings();
 
+		const adapter = this.app.vault.adapter as FileSystemAdapter;
+
 		this.addRibbonIcon('dice', 'Sample Plugin', () => {
 			new Notice('This is a notice!');
 		});
@@ -32,7 +53,9 @@ export default class MyPlugin extends Plugin {
 				let leaf = this.app.workspace.activeLeaf;
 				if (leaf) {
 					if (!checking) {
-						new SampleModal(this.app).open();
+
+						const filePath = adapter.getFullPath(this.app.workspace.getActiveFile().path);
+						processInVim(filePath);
 					}
 					return true;
 				}
@@ -67,13 +90,14 @@ export default class MyPlugin extends Plugin {
 }
 
 class SampleModal extends Modal {
-	constructor(app: App) {
+	constructor(app: App, ) {
 		super(app);
 	}
 
 	onOpen() {
-		let {contentEl} = this;
-		contentEl.setText('Woah!');
+		let {contentEl} = this;	
+		contentEl.setText(this.app.workspace.getActiveFile().path);
+
 	}
 
 	onClose() {
