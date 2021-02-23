@@ -2,8 +2,9 @@ import { App, Modal, Notice, Plugin, PluginSettingTab, Setting, FileSystemAdapte
 
 const { exec } = require('child_process');
 
-const processInVim = (filePath: string) => {
-	exec(`nvim -c 'e ${filePath}' -c 'wq'`, (error: string, stdout: string, stderr: string) => {
+const processWithVim = (filePath: string, write = false) => {
+	console.log(filePath)
+	exec(`nvim -c 'e ${filePath}' -c 'q'`, (error: string, stdout: string, stderr: string) => {
 		if (error) {
 				console.log(`error: ${error}`);
 				return;
@@ -16,8 +17,6 @@ const processInVim = (filePath: string) => {
 		console.log("noe")
 	});
 }
-
-
 
 interface MyPluginSettings {
 	mySetting: string;
@@ -37,6 +36,7 @@ export default class MyPlugin extends Plugin {
 
 		const adapter = this.app.vault.adapter as FileSystemAdapter;
 
+
 		this.addRibbonIcon('dice', 'Sample Plugin', () => {
 			new Notice('This is a notice!');
 		});
@@ -44,8 +44,8 @@ export default class MyPlugin extends Plugin {
 		this.addStatusBarItem().setText('Status Bar Text');
 
 		this.addCommand({
-			id: 'open-sample-modal',
-			name: 'Open Sample Modal',
+			id: 'nvim-edit',
+			name: 'Update note',
 			// callback: () => {
 			// 	console.log('Simple Callback');
 			// },
@@ -55,7 +55,27 @@ export default class MyPlugin extends Plugin {
 					if (!checking) {
 
 						const filePath = adapter.getFullPath(this.app.workspace.getActiveFile().path);
-						processInVim(filePath);
+						processWithVim(filePath);
+					}
+					return true;
+				}
+				return false;
+			}
+		});
+
+		this.addCommand({
+			id: 'nvim-write',
+			name: 'Write to note',
+			// callback: () => {
+			// 	console.log('Simple Callback');
+			// },
+			checkCallback: (checking: boolean) => {
+				let leaf = this.app.workspace.activeLeaf;
+				if (leaf) {
+					if (!checking) {
+						const filePath = adapter.getFullPath(this.app.workspace.getActiveFile().path);
+						processWithVim(filePath, true);
+
 					}
 					return true;
 				}
