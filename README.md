@@ -1,45 +1,20 @@
-## Obsidian Sample Plugin
+## Obsidian Vim Utility Plugin
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+A simple plugin to mame it easier to use [Obsidian.md](https://obsidian.md/) together with Vim. I made it because I wanted to use Obsidian together with vim, [taskwarrior](https://taskwarrior.org/) and [taskwiki](https://github.com/tools-life/taskwiki).
 
-This project uses Typescript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in Typescript Definition format, which contains TSDoc comments describing what it does.
+It adds two commands to Obsidian.
 
-**Note:** The Obsidian API is still in early alpha and is subject to change at any time!
+1. Open current note with [MacVim](https://macvim-dev.github.io/macvim/).
+2. Process note with [nvim](https://neovim.io/).
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
+It currently only works on mac. The first command requires MacVim and the second requires nvim, but it would be easy to change it to similar solutions.
 
-- Changes the default font color to red using `styles.css`.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+The second command opens the current note with nvim in the background, writes and closes it. In my own case I use this to sync the note with taskwarrior.
 
-### Releasing new releases
+This solution is quite hacky and it is far from optimal. It does, however, make it easier for me to work with obsidian and taskwarrior, and I hope it can come to use for someone else too.
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments.
-- Publish the release.
+Based on the sample plugin for Obsidian.
 
-### Adding your plugin to the community plugin list
+### Manuall install
 
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
-
-### How to use
-
-- Clone this repo.
-- `npm i` or `yarn` to install dependencies
-- `npm run dev` to start compilation in watch mode.
-
-### Manually installing the plugin
-
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
-
-### API Documentation
-
-See https://github.com/obsidianmd/obsidian-api
+Copy main.js and manifest.json from this repository into .obsidian/plugins/obsidian-vim-utility in your Obsidian.md vault.

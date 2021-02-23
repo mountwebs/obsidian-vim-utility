@@ -1,10 +1,9 @@
 {
-	"id": "obsidian-taskwiki-plugin",
-	"name": "Taskwiki plugin",
+	"id": "obsidian-vim-utility",
+	"name": "Obsidian vim utility plugin",
 	"version": "1.0.0",
 	"minAppVersion": "10.0.0",
-	"description": "This is a simple hacky plugin to use obsidian together with nvim/vimwiki/taskwiki.",
+	"description": "A simple plugin to mame it easier to use Obsidian together with Vim.",
 	"author": "Stian Klasbu",
-	"authorUrl": "https://obsidian.md/about",
 	"isDesktopOnly": true
 }

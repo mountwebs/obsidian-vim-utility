@@ -1,7 +1,7 @@
 {
-  "name": "obsidian-sample-plugin",
+  "name": "obsidian-vim-utility",
   "version": "1.0.0",
-  "description": "This is a simple hacky plugin to use Obsidian (https://obsidian.md) together with nvim/vimwiki/taskwiki.",
+  "description": "A simple plugin to mame it easier to use Obsidian.md together with Vim.",
   "main": "main.js",
   "scripts": {
     "dev": "rollup --config rollup.config.js -w",
