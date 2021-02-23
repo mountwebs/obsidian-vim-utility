@@ -1,10 +1,10 @@
 import { App, Modal, Notice, Plugin, PluginSettingTab, Setting, FileSystemAdapter} from 'obsidian';
 
-const { exec } = require('child_process');
+const { exec, spawn } = require('child_process');
 
 const processWithVim = (filePath: string, write = false) => {
 	console.log(filePath)
-	exec(`nvim -c 'e ${filePath}' -c 'q'`, (error: string, stdout: string, stderr: string) => {
+	exec(`nvim -c 'e ${filePath}' -c 'wq'`, (error: string, stdout: string, stderr: string) => {
 		if (error) {
 				console.log(`error: ${error}`);
 				return;
@@ -14,8 +14,13 @@ const processWithVim = (filePath: string, write = false) => {
 				return;
 		}
 		console.log(`stdout: ${stdout}`);
-		console.log("noe")
 	});
+}
+
+const newVim = (filePath: string, write = false) => {
+	console.log(filePath)
+	let openTerminalAtPath = spawn ('open', [ '-a', 'MacVim', filePath ]);
+	openTerminalAtPath.on ('error', (err: Error) => { console.log (err); });	
 }
 
 interface MyPluginSettings {
@@ -74,7 +79,8 @@ export default class MyPlugin extends Plugin {
 				if (leaf) {
 					if (!checking) {
 						const filePath = adapter.getFullPath(this.app.workspace.getActiveFile().path);
-						processWithVim(filePath, true);
+						// processWithVim(filePath, true);
+						newVim(filePath);
 
 					}
 					return true;
