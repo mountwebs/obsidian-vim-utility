@@ -1,6 +1,6 @@
 ## Obsidian Vim Utility Plugin
 
-A simple plugin to mame it easier to use [Obsidian.md](https://obsidian.md/) together with Vim. I made it because I wanted to use Obsidian together with vim, [taskwarrior](https://taskwarrior.org/) and [taskwiki](https://github.com/tools-life/taskwiki). Made for mac.
+A simple plugin to mame it easier to use [Obsidian.md](https://obsidian.md/) together with Vim. I made it because I wanted to use Obsidian together with vim, [taskwarrior](https://taskwarrior.org/) and [taskwiki](https://github.com/tools-life/taskwiki). It was made for Mac.
 
 It adds two commands to Obsidian.
 
