@@ -3,7 +3,7 @@
 	"name": "Obsidian vim utility plugin",
 	"version": "1.0.0",
 	"minAppVersion": "10.0.0",
-	"description": "A simple plugin to mame it easier to use Obsidian together with Vim.",
+	"description": "A simple plugin to make it easier to use Obsidian together with Vim.",
 	"author": "Stian Klasbu",
 	"isDesktopOnly": true
 }
